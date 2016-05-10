@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+	<LinearLayout
+    	android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent">    
+		<Button 
+			android:id="@+id/scanButton"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"			
+			android:text="Scan/Stop"/>
+		<Button 
+			android:id="@+id/addressButton"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"			
+			android:text="MAC"/>
+		<Button 
+		    android:id="@+id/nameButton"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"		    
+			android:text="Name"/>
+	</LinearLayout>
+	<LinearLayout
+    	android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent">    	
+		<Button 
+			android:id="@+id/registerButton"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"			
+			android:text="Register"/>
+        <Button 
+			android:id="@+id/authenticateButton"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"			
+			android:text="Auth"/>
+		<Button 
+			android:id="@+id/authenticateCheckButton"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"			
+			android:text="Auth (check)"/>
+	</LinearLayout>
+	<LinearLayout
+    	android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent">    			
+		<Button 
+			android:id="@+id/disconnectButton"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"						
+			android:text="Disconnect"/>
+		<Button         	     
+			android:id="@+id/clearLogButton"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"						
+			android:text="Clear logs"/>
+	</LinearLayout>
+	<LinearLayout
+    	android:orientation="horizontal"
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent">    							
+		<Button 
+			android:id="@+id/invalidAp"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"						
+			android:text="Bad app params"/>
+		<Button 
+			android:id="@+id/invalidKeyhandle"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"						
+			android:text="Bad key handle"/>
+	</LinearLayout>
+	<TextView
+		android:id="@+id/logView"
+		android:scrollbars="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"						
+		android:text=""/>                            
+</LinearLayout>
+	

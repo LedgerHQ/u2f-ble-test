@@ -51,8 +51,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
+import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -499,6 +503,26 @@ public class MainActivity extends Activity implements Logger {
 		return "[" + device.getName() + "/" + device.getAddress() + "]";
 	}
 	
+	public boolean isLocationEnabled() {
+	    int locationMode = 0;
+	    String locationProviders;
+
+	    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+	        try 
+	        {
+	        	locationMode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE);
+	        } 
+	        catch (SettingNotFoundException e) {
+	        }
+	        return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+
+	    }
+	    else{
+	    	locationProviders = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+	    	return !TextUtils.isEmpty(locationProviders);
+	    }
+	} 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -693,7 +717,23 @@ public class MainActivity extends Activity implements Logger {
 					debug("Using regular key handle");
 				}
 			}
-		});		
+		});	
+
+		if (!isLocationEnabled()) {
+			final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("This app needs location access");
+			builder.setMessage("Please enable any location service so this app can detect beacons");
+			builder.setPositiveButton(android.R.string.ok, null);
+			builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+				
+				@Override
+				public void onDismiss(DialogInterface arg0) {
+					  Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+					  startActivity(myIntent);									
+				}
+			});
+			builder.show();			
+		}
 		
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 			if (this.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
